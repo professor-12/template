@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title></title>
+        <link rel="stylesheet" href="./dist/output.css" />
+        <style>
+            th,
+            td,
+            tr,
+            table {
+                border: 1px solid rgb(169, 169, 169);
+                padding: 2px;
+                border-collapse: collapse;
+                text-align: left;
+                padding-left: 8px;
+                table-layout: fixed;
+            }
+
+
+
+            table {
+                width: 100%;
+            }
+
+            .bar::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            .bar::-webkit-scrollbar-track {
+                background: transparent;
+            }
+            .bar::-webkit-scrollbar-thumb {
+                background: rgb(170, 170, 170);
+                border-radius: 6px;
+            }
+        </style>
+    </head>
+
+    <!-- ----------------------info---------------- -->
+    <body class="bg-gray-200 p-2">
+        <div class="mx-auto">
+            <nav class="p-6 py-3">
+                <div class="flex flex-col">
+                    <div class="flex justify-between">
+                        <div
+                            class="bg-white shadow border-b-transparent px-4 py-2 text-green-500 font-normal font-sans"
+                        >
+                            <button
+                                class="px-3 py-2 font-normal rounded text-lg"
+                            >
+                                Templates
+                            </button>
+                        </div>
+                        <div class="flex justify-end py-2 text-white">
+                            <button
+                                class="bg-green-500 px-2  hover:cursor-pointer rounded flex items-center justify-between text-white text-sm font-normal"
+                                id="open-modal"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="20"
+                                    height="26"
+                                    fill="currentColor"
+                                    class="bi bi-plus"
+                                    viewBox="0 0 16 16"
+                                >
+                                    <path
+                                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+                                    />
+                                </svg>
+                                Add Template
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex flex-col border border-transparent flex-1">
+                        <div class="shadow bg-white border-l-0 py-6"></div>
+                    </div>
+                </div>
+            </nav>
+
+            <div
+                class="modal fixed inset-0 bg-black bg-opacity-80 justify-center hidden"
+                id="Modal"
+            >
+                <div
+                    class="bar w-[50%] mt-[5.7rem] lg:w-[40%] flex flex-col rounded-md"
+                >
+                    <div
+                        class="p-3 flex bg-white rounded-t justify-between w-full border-b-4 border-b-green-500"
+                    >
+                        <div
+                            class="font-semibold text-black font-sans flex items-center"
+                        >
+                            Add Template
+                        </div>
+                        <div class="font-bold cursor-pointer text-black">
+                            <svg
+                                id="closeModal"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                fill="currentColor"
+                                class="bi h-7 font-bold bi-x-lg cursor-pointer"
+                                viewBox="0 0 16 16"
+                            >
+                                <path
+                                    d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"
+                                />
+                            </svg>
+                        </div>
+                    </div>
+                    <div
+                        class="bar h-[60%] bg-white overflow-scroll px-4 py-4 pb-0 flex flex-col space-y-3 bg-grey"
+                    >
+                        <div class="">
+                            <div class="flex items-center space-x-2 mb-3">
+                                <p class="font-normal">Template Name</p>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="13"
+                                    fill="currentColor"
+                                    class="bi bi-info-circle-fill"
+                                    viewBox="0 0 16 16"
+                                >
+                                    <path
+                                        d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"
+                                    />
+                                </svg>
+                            </div>
+                            <input
+                                type="text"
+                                class="w-full p-2 border border-gray-400 rounded focus:outline-none"
+                            />
+                        </div>
+                        <div class="flex flex-col space-y-1">
+                            <div class="flex items-center space-x-2 mb-3">
+                                <p class="font-normal">Description</p>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="13"
+                                    fill="currentColor"
+                                    class="bi bi-info-circle-fill"
+                                    viewBox="0 0 16 16"
+                                >
+                                    <path
+                                        d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"
+                                    />
+                                </svg>
+                            </div>
+                            <input
+                                type="text"
+                                class="w-full p-3 h-20 border border-gray-400 rounded focus:outline-none"
+                            />
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <h1 class="font-normal flex items-center space-x-2">
+                                <div>Link Page Type</div>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="13"
+                                    fill="currentColor"
+                                    class="bi bi-info-circle-fill"
+                                    viewBox="0 0 16 16"
+                                >
+                                    <path
+                                        d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"
+                                    />
+                                </svg>
+                            </h1>
+                            <div>
+                                <div
+                                    class="p-1 cursor-pointer font-normal rounded flex justify-between border border-gray-400 items-center"
+                                    id="drop-down"
+                                >
+                                    <div>Select</div>
+
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="13"
+                                        fill="currentColor"
+                                        class="bi bi-caret-down-fill"
+                                        viewBox="0 0 16 16"
+                                    >
+                                        <path
+                                            d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"
+                                        />
+                                    </svg>
+                                </div>
+                                <div
+                                    id="drop-down-list"
+                                    class="p-2 hidden font-normal rounded space-y-3 flex-col justify-between border border-gray-400 bg-white"
+                                >
+                                    <div>
+                                        <input
+                                            type="text"
+                                            placeholder="Search"
+                                            class="border focus:outline-none shadow px-2 rounded font-normal w-full border-gray-500"
+                                        />
+                                    </div>
+                                    <ul>
+                                        <li
+                                            class="hover:bg-slate-100 p-1 cursor-pointer"
+                                        >
+                                            Locator
+                                        </li>
+                                        <li
+                                            class="hover:bg-slate-100 p-1 cursor-pointer"
+                                        >
+                                            Store Page
+                                        </li>
+                                        <li
+                                            class="hover:bg-slate-100 p-1 cursor-pointer"
+                                        >
+                                            Product Page
+                                        </li>
+                                        <li
+                                            class="hover:bg-slate-100 p-1 cursor-pointer"
+                                        >
+                                            Service Page
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-col space-y-2">
+                            <h1 class="font-normal flex">Template type</h1>
+                            <div>
+                                <div
+                                    class="p-1 cursor-pointer font-normal rounded flex justify-between border border-gray-400 items-center"
+                                    id="a-drop-down"
+                                >
+                                    <div>Locator</div>
+
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="13"
+                                        fill="currentColor"
+                                        viewBox="0 0 16 16"
+                                    >
+                                        <path
+                                            d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"
+                                        />
+                                    </svg>
+                                </div>
+                                <div
+                                    id="a-drop-down-list"
+                                    class="p-2 hidden font-normal rounded space-y-3 flex-col justify-between border border-gray-400 bg-white"
+                                >
+                                    <div>
+                                        <input
+                                            type="text"
+                                            placeholder="Search"
+                                            class="border focus:outline-none shadow px-2 rounded font-normal w-full border-gray-500"
+                                        />
+                                    </div>
+                                    <ul>
+                                        <li
+                                            class="hover:bg-slate-100 p-1 cursor-pointer"
+                                        >
+                                            Locator
+                                        </li>
+                                        <li
+                                            class="hover:bg-slate-100 p-1 cursor-pointer"
+                                        >
+                                            Top Level Index
+                                        </li>
+                                        <li
+                                            class="hover:bg-slate-100 p-1 cursor-pointer"
+                                        >
+                                            State Level Index
+                                        </li>
+                                        <li
+                                            class="hover:bg-slate-100 p-1 cursor-pointer"
+                                        >
+                                            City Level Index
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col space-y-2">
+                            <div class="flex flex-col">
+                                <div class="flex items-center space-x-2 mb-3">
+                                    <p class="font-normal">Client host</p>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="13"
+                                        fill="currentColor"
+                                        class="bi bi-info-circle-fill"
+                                        viewBox="0 0 16 16"
+                                    >
+                                        <path
+                                            d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"
+                                        />
+                                    </svg>
+                                </div>
+                                <input
+                                    type="text"
+                                    class="w-full p-2 border border-gray-400 rounded focus:outline-none"
+                                    placeholder="https://hosted.blabla"
+                                />
+                            </div>
+                            <div class="flex flex-col">
+                                <div class="flex items-center space-x-2 mb-3">
+                                    <p class="font-normal">
+                                        Template directory
+                                    </p>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="13"
+                                        height="16"
+                                        fill="currentColor"
+                                        class="bi bi-info-circle-fill"
+                                        viewBox="0 0 16 16"
+                                    >
+                                        <path
+                                            d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"
+                                        />
+                                    </svg>
+                                </div>
+                                <input
+                                    type="text"
+                                    class="w-full p-2 border border-slate-500 rounded focus:outline-none"
+                                    placeholder="root"
+                                />
+                            </div>
+                            <div class="flex flex-col">
+                                <div class="flex items-center space-x-2 mb-3">
+                                    <p class="font-normal">Template File</p>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="13"
+                                        fill="currentColor"
+                                        class="bi bi-info-circle-fill"
+                                        viewBox="0 0 16 16"
+                                    >
+                                        <path
+                                            d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"
+                                        />
+                                    </svg>
+                                </div>
+                                <input
+                                    type="text"
+                                    class="w-full p-2 border focus:outline-none border-slate-500 rounded"
+                                    placeholder="index.tmpl"
+                                />
+                            </div>
+                            <div>
+                                <div class="flex space-x-2 mt-5">
+                                    <input
+                                        type="checkbox"
+                                        id="active"
+                                        class="p-3"
+                                        name="active"
+                                        checked
+                                    />
+                                    <label for="active" class="font-normal ml-2"
+                                        >Active</label
+                                    >
+                                </div>
+                                <div class="flex space-x-2">
+                                    <input
+                                        type="checkbox"
+                                        id="active"
+                                        name=""
+                                        checked
+                                        class=""
+                                    />
+                                    <label for="active" class="ml-2 font-normal"
+                                        >Default Template</label
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="p-3 items-center flex bg-gray-200 justify-between w-full border-b-4"
+                    >
+                        <div
+                            class="font-normal text-black font-sans flex items-center"
+                        >
+                            <button
+                                id="cancel"
+                                class="rounded-sm shadow-xl border border-gray-300 bg-white py-1 px-3"
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                        <div class="font-bold cursor-pointer text-black">
+                            <button
+                                id="save"
+                                class="rounded-sm text-white font-normal p-2 px-3 bg-emerald-950 ml-3"
+                            >
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ------------------modal-------------------- -->
+
+            <section class="p-6 pt-0">
+                <div class="w-full">
+                    <div
+                        class="border py-2 px-2 shadow bg-white border-t-4 border-t-green-500"
+                    >
+                        <input
+                            type="text"
+                            class="border px-2 focus:outline-none shadow rounded border-slate-400"
+                            placeholder="Search"
+                        />
+                    </div>
+
+                    <table class="bg-white">
+                        <thead>
+                            <tr class="shadow">
+                                <th>
+                                    <div
+                                        class="font-semibold flex justify-between items-center py-2 px-0"
+                                    >
+                                        Template Name
+                                        <div>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="16"
+                                                height="12"
+                                                fill="currentColor"
+                                                class="bi bi-caret-up-fill"
+                                                viewBox="0 0 16 16"
+                                            >
+                                                <path
+                                                    d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"
+                                                />
+                                            </svg>
+
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="16"
+                                                height="15"
+                                                fill="currentColor"
+                                                class="bi bi-caret-down-fill"
+                                                viewBox="0 0 16 16"
+                                            >
+                                                <path
+                                                    d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"
+                                                />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="font-semibold px-0">URL</div>
+                                </th>
+                                <th>
+                                    <div
+                                        class="font-semibold py-1 flex justify-between px-0"
+                                    >
+                                        Linked Page Type
+                                        <div>
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="16"
+                                                height="12"
+                                                fill="currentColor"
+                                                class="bi bi-caret-up-fill"
+                                                viewBox="0 0 16 16"
+                                            >
+                                                <path
+                                                    d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"
+                                                />
+                                            </svg>
+
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="16"
+                                                height="12"
+                                                fill="currentColor"
+                                                class="bi bi-caret-down-fill"
+                                                viewBox="0 0 16 16"
+                                            >
+                                                <path
+                                                    d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"
+                                                />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="font-semibold py-1 px-0">
+                                        Applied Pages
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="font-semibold py-1 px-0">
+                                        Actions
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="py-2 font-sans font-normal">
+                                        Locator
+                                    </div>
+                                </td>
+                                <td>
+                                    <div
+                                        class="py-2 font-sans font-normal"
+                                    ></div>
+                                </td>
+                                <td>
+                                    <div class="py-2 font-sans font-normal">
+                                        Locator
+                                    </div>
+                                </td>
+                                <td>
+                                    <div
+                                        class="py-2 flex justify-end px-1 font-sans font-normal"
+                                    >
+                                        1
+                                    </div>
+                                </td>
+                                <td>
+                                    <div
+                                        class="py-2 space-x-2 flex items-center font-sans font-normal"
+                                    >
+                                        <div
+                                            class="border border-gray-400 p-1 rounded px-3"
+                                        >
+                                            Edit
+                                        </div>
+                                        <div
+                                            class="border border-gray-400 p-1 rounded px-3"
+                                        >
+                                            Delete
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="py-2 font-sans font-normal">
+                                        Top Level Index
+                                    </div>
+                                </td>
+                                <td>
+                                    <div
+                                        class="py-2 font-sans font-normal"
+                                    ></div>
+                                </td>
+                                <td>
+                                    <div class="py-2 font-sans font-normal">
+                                        Index page
+                                    </div>
+                                </td>
+                                <td>
+                                    <div
+                                        class="py-2 flex justify-end px-1 font-sans font-normal"
+                                    >
+                                        1
+                                    </div>
+                                </td>
+                                <td>
+                                    <div
+                                        class="py-2 space-x-2 flex items-center font-sans font-normal"
+                                    >
+                                        <div
+                                            class="border border-gray-400 p-1 rounded px-3"
+                                        >
+                                            Edit
+                                        </div>
+                                        <div
+                                            class="border border-gray-400 p-1 rounded px-3"
+                                        >
+                                            Delete
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="py-2 font-sans font-normal">
+                                        State Level index
+                                    </div>
+                                </td>
+                                <td>
+                                    <div
+                                        class="py-2 font-sans font-normal"
+                                    ></div>
+                                </td>
+                                <td>
+                                    <div class="py-2 font-sans font-normal">
+                                        Index Page
+                                    </div>
+                                </td>
+                                <td>
+                                    <div
+                                        class="py-2 flex justify-end px-1 font-sans font-normal"
+                                    >
+                                        50
+                                    </div>
+                                </td>
+                                <td>
+                                    <div
+                                        class="py-2 space-x-2 flex items-center font-sans font-normal"
+                                    >
+                                        <div
+                                            class="border border-gray-400 p-1 rounded px-3"
+                                        >
+                                            Edit
+                                        </div>
+                                        <div
+                                            class="border border-gray-400 p-1 rounded px-3"
+                                        >
+                                            Delete
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="py-2 font-sans font-normal">
+                                        City Level Index
+                                    </div>
+                                </td>
+                                <td>
+                                    <div
+                                        class="py-2 font-sans font-normal"
+                                    ></div>
+                                </td>
+                                <td>
+                                    <div class="py-2 font-sans font-normal">
+                                        Index Page
+                                    </div>
+                                </td>
+                                <td>
+                                    <div
+                                        class="py-2 flex justify-end px-1 font-sans font-normal"
+                                    >
+                                        108,000
+                                    </div>
+                                </td>
+                                <td>
+                                    <div
+                                        class="py-2 space-x-2 flex items-center font-sans font-normal"
+                                    >
+                                        <div
+                                            class="border border-gray-400 p-1 rounded px-3"
+                                        >
+                                            Edit
+                                        </div>
+                                        <div
+                                            class="border border-gray-400 p-1 rounded px-3"
+                                        >
+                                            Delete
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="py-2 font-sans font-normal">
+                                        store Page-Open
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="py-2 font-sans font-normal text-sm">
+                                        /stores/{%state}/{%city}/{&store_id}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="py-2 font-sans font-normal">
+                                        Store Page
+                                    </div>
+                                </td>
+                                <td>
+                                    <div
+                                        class="py-2 flex justify-end px-1 font-sans font-normal"
+                                    >
+                                        52
+                                    </div>
+                                </td>
+                                <td>
+                                    <div
+                                        class="py-2 space-x-2 flex items-center font-sans font-normal"
+                                    >
+                                        <div
+                                            class="border border-gray-400 p-1 rounded px-3"
+                                        >
+                                            Edit
+                                        </div>
+                                        <div
+                                            class="border border-gray-400 p-1 rounded px-3"
+                                        >
+                                            Delete
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="py-2 font-sans font-normal">
+                                        Store Page - Closed
+                                    </div>
+                                </td>
+                                <td>
+                                    <div
+                                        class="py-2 font-sans font-normal text-sm "
+                                    >
+                                        /stores/{%state}/{%city}/{&store_id}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="py-2 font-sans font-normal">
+                                        Store Page
+                                    </div>
+                                </td>
+                                <td>
+                                    <div
+                                        class="py-2 flex justify-end px-1 font-sans font-normal"
+                                    >
+                                        7
+                                    </div>
+                                </td>
+                                <td>
+                                    <div
+                                        class="py-2 space-x-2 flex items-center font-sans font-normal"
+                                    >
+                                        <div
+                                            class="border border-gray-400 p-1 rounded px-3"
+                                        >
+                                            Edit
+                                        </div>
+                                        <div
+                                            class="border border-gray-400 p-1 rounded px-3"
+                                        >
+                                            Delete
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="py-2 font-sans font-normal">
+                                        Store Product Page
+                                    </div>
+                                </td>
+                                <td>
+                                    <div
+                                        class="py-2 w-1/2 font-sans font-normal text-sm"
+                                    >
+                                        /stores/{%state}/{%city}/{&store_id}/{%product}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="py-2 font-sans font-normal">
+                                        Product Page
+                                    </div>
+                                </td>
+                                <td>
+                                    <div
+                                        class="py-2 flex justify-end px-1 font-sans font-normal"
+                                    >
+                                        125
+                                    </div>
+                                </td>
+                                <td>
+                                    <div
+                                        class="py-2 space-x-2 flex items-center font-sans font-normal"
+                                    >
+                                        <div
+                                            class="border border-gray-400 p-1 rounded px-3"
+                                        >
+                                            Edit
+                                        </div>
+                                        <div
+                                            class="border border-gray-400 p-1 rounded px-3"
+                                        >
+                                            Delete
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="py-2 font-sans font-normal">
+                                        City Product Page
+                                    </div>
+                                </td>
+                                <td>
+                                    <div
+                                        class="py-2 font-sans font-normal text-sm"
+                                    >/stores/{%state}/{%city}/{Product}</div>
+                                </td>
+                                <td>
+                                    <div class="py-2 font-sans font-normal">
+                                        Product Page
+                                    </div>
+                                </td>
+                                <td>
+                                    <div
+                                        class="py-2 flex justify-end px-1 font-sans font-normal"
+                                    >
+                                        17
+                                    </div>
+                                </td>
+                                <td>
+                                    <div
+                                        class="py-2 space-x-2 flex items-center font-sans font-normal"
+                                    >
+                                        <div
+                                            class="border border-gray-400 p-1 rounded px-3"
+                                        >
+                                            Edit
+                                        </div>
+                                        <div
+                                            class="border border-gray-400 p-1 rounded px-3"
+                                        >
+                                            Delete
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="py-2 font-sans font-normal">
+                                        Service Page - Fiber
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="py-2 font-sans font-normal text-sm">
+                                        /local/cell-phones/{%state}/{%city}/
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="py-2 font-sans fonnormal">
+                                        Service Page
+                                    </div>
+                                </td>
+                                <td>
+                                    <div
+                                        class="py-2 flex justify-end px-1 font-sans fonnormal"
+                                    >
+                                        74
+                                    </div>
+                                </td>
+                                <td>
+                                    <div
+                                        class="py-2 space-x-2 flex items-center font-sans fonnormal"
+                                    >
+                                        <div
+                                            class="border border-gray-400 p-1 rounded px-3"
+                                        >
+                                            Edit
+                                        </div>
+                                        <div
+                                            class="border border-gray-400 p-1 rounded px-3"
+                                        >
+                                            Delete
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="py-2 font-sans font-normal">
+                                        Service Page - Internet
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="py-2 font-sans font-normal text-sm">
+                                        /local/Internet/{%state}/{%city}/
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="py-2 font-sans fonnormal">
+                                        Service Page
+                                    </div>
+                                </td>
+                                <td>
+                                    <div
+                                        class="py-2 flex justify-end px-1 font-sans fonnormal"
+                                    >
+                                        74
+                                    </div>
+                                </td>
+                                <td>
+                                    <div
+                                        class="py-2 space-x-2 flex items-center font-sans fonnormal"
+                                    >
+                                        <div
+                                            class="border border-gray-400 p-1 rounded px-3"
+                                        >
+                                            Edit
+                                        </div>
+                                        <div
+                                            class="border border-gray-400 p-1 rounded px-3"
+                                        >
+                                            Delete
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                    
+                        </tbody>
+                    </table>
+
+                     <div
+                        class="border flex items-center  justify-between rounded-b py-3  border-gray-400 bg-gray-50 px-3"
+                    >
+                        <h1 class="text-sm">Showing <b>1-10 of 52</b> entries</h1>
+
+                        <div class="flex space-x-4">
+                        <div class="bg-green-500  px-2 flex items-center rounded text-white font-medium">
+                                10
+                            </div>
+                            <div class="font-medium">25</div>
+                            <div class="font-medium">50</div>
+                           <div class="shadow-gray-800 shadow rounded py-1 bg-white px-3 text-sm flex items-center">PREV
+                            </div>
+                            <div class="bg-green-500  px-2 flex items-center rounded text-white font-medium">
+                                10
+                            </div>
+                            <div class="font-medium">2</div>
+                            <div class="font-medium">3</div>
+                            <div class="font-medium">4</div>
+                            <div class="font-medium">5</div>
+                            <div>...</div>
+                            <div class="font-medium">6</div>
+                            <div class="shadow-gray-800 shadow rounded py-1 bg-white px-3 text-sm flex items-center">NEXT
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-- <script src="script.js"></script>
+         -->
+        <script src="script.js"></script>
+    </body>
+</html>
